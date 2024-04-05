@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "diffmodeling"
+version = "0.0.1"
+description = "Diploma program to control equations with a non full boundary conditions"
+authors = ["KyryloTheRylo <kiril.mosiychuk@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
