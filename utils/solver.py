@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field, InitVar
 from abc import ABC
+from typing import Callable
 
 import numpy as np
 
@@ -14,12 +15,19 @@ class MatrixSolver(ABC):
     """Boundary condition"""
     x_N: int
     """Control condition"""
-    A: np.ndarray = field(repr=False)  # Internal storage after validation
+    A: Callable = field(repr=False)  # Internal storage after validation
     b: np.ndarray = field(repr=False)
+
+    X_domain: tuple[float, float] = field(init=False, default=(0, 10000))
+    T_domain: tuple[float, float] = field(init=False, default=(-4, 20))
+    x_points: int = field(init=False, default=100)
+    t_points: int = field(init=False, default=100)
 
     u_0: np.ndarray = field(init=False)
     u_B: np.ndarray = field(init=False)
     u_N: np.ndarray = field(init=False)
+
+
 
     def __post_init__(self):
 
@@ -34,16 +42,9 @@ class MatrixSolver(ABC):
 
     def solve(self) -> np.ndarray:
         """Solve the matrix equation (A@x - b)**2 -> min."""
-        # Solve the matrix equation
-        v = np.random.rand(self.b.shape[0])
-        print(v)
-        x = np.linalg.pinv(self.A) @ (self.b - self.A@v) + v
-
-        self.u_0 = x[:self.x_0]
-        self.u_B = x[self.x_0:self.x_0 + self.x_B]
-        self.u_N = x[self.x_0 + self.x_B:]
-        return x
-
+        answer: callable = lambda x: 0
+        P_inv =
+        answer = lambda x: self.A(x)
 
 # Example usage:
 # Create an instance of the solver
@@ -59,4 +60,3 @@ if __name__ == '__main__':
 
     print(solver.u_0, solver.u_B, solver.u_N)
     from graph_utils import plot_solution
-

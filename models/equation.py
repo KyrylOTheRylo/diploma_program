@@ -23,7 +23,20 @@ class Condition:
     """Condition class."""
 
     condition_type: ConditionType
+    """Condition type. Initial, boundary, or control."""
 
+    condition_dict_type: ConditionDictType
+    """Condition dictionary type. Functional or discrete."""
+
+    condition: Optional[dict[Callable, Callable | float]] = field(default=None)
+
+    """Condition value. Functional or discrete."""
+
+    partial_derivatives: Optional[list] = field(default=None)
+
+    def __post_init__(self):
+        """Check if the condition is valid."""
+        pass
 
 
 @dataclass()
@@ -42,7 +55,8 @@ class EuropeanOption:
 
     G: Optional[Callable] = field(default=None)
     """Greens function"""
-    Y_0: Optional[dict[Callable, Callable | float], list[int]] = field(default=(dict(), list()))
+
+    conditions: Optional[list[Condition]] = field(default=None)
+    """Conditions"""
 
 
-print((EuropeanOption(100, 100, 0.05, 1, 0.2)))
