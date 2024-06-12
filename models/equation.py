@@ -1,12 +1,12 @@
-import numpy
 from dataclasses import dataclass, field
-from typing import Callable, Tuple, Optional
+from typing import Callable, Optional
 
 from enum import Enum
 
 
 class ConditionType(Enum):
     """Condition type."""
+
     INITIAL = 0
     BOUNDARY = 1
     CONTROL = 2
@@ -14,6 +14,7 @@ class ConditionType(Enum):
 
 class ConditionDictType(Enum):
     """Condition dictionary type."""
+
     FUNCTIONAL = 0
     DISCRETE = 1
 
@@ -58,5 +59,3 @@ class EuropeanOption:
 
     conditions: Optional[list[Condition]] = field(default=None)
     """Conditions"""
-
-
